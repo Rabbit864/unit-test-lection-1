@@ -1,0 +1,384 @@
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reset.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/theme/simple.min.css"
+      id="theme"
+    />
+    <link rel="stylesheet" href="highlight-phpstorm-light-theme.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap"
+    />
+    <style>
+      :root {
+        --r-main-font: 'Roboto', 'Noto Color Emoji', sans-serif;
+        --r-heading-font: 'Roboto', 'Noto Color Emoji', sans-serif;
+        --r-code-font: 'Roboto Mono', 'Noto Color Emoji', monospace;
+        --r-block-margin: 10px;
+      }
+      .reveal pre {
+        font-size: 0.5em;
+      }
+      .nohighlight {
+        padding: 1em !important;
+      }
+      .reveal .hljs {
+        min-height: auto;
+      }
+      td.hljs-ln-code {
+        white-space: pre;
+      }
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4,
+      .reveal h5,
+      .reveal h6,
+      .reveal pre,
+      .reveal p,
+      .reveal img {
+        margin: 0 var(--r-block-margin) calc(var(--r-block-margin) * 2);
+      }
+      .reveal pre {
+        width: auto;
+      }
+
+      .reveal .r-stack > * {
+        margin: 0;
+      }
+      .horizontal {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+      }
+      .horizontal > * {
+        flex-grow: 1;
+      }
+      .horizontal-half > * {
+        flex-grow: 0 !important;
+        width: calc(50% - var(--r-block-margin) * 2) !important;
+      }
+    </style>
+    <title>Тестирование</title>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h2>Тестирование</h2>
+        </section>
+
+        <section>
+          <p>Контроль качества (QA)</p>
+          <p>
+            QA engineer это специалист, ответственный за контроль выполнения
+            требований к продукту. Он запускает тесты и применяет другие методы
+            для проверки качества, которое представляет собой отношение между
+            ожиданиями и реальностью в контексте определенного продукта
+          </p>
+        </section>
+
+        <section>
+          <p>
+            Тестирование программного обеспечения процесс исследования
+            программного продукта на всех этапах жизненного цикла с целью
+            получения информации о качестве продукта.
+          </p>
+        </section>
+
+        <section>
+          <h3>Разновидности тестов</h3>
+          <ol>
+            <li>Smoke-тесты (дымовые)</li>
+            <li>Sanity-тесты</li>
+            <li>Re-test’ы</li>
+            <li>Regression-тесты</li>
+          </ol>
+        </section>
+
+        <section>
+          <h3>Подходы тестирования</h3>
+          <ol>
+            <li>Ручное тестирование</li>
+            <li>Автоматизация тестирования</li>
+          </ol>
+        </section>
+
+        <section>
+          <img src="img/test1.png" alt="" />
+        </section>
+
+        <section>
+          <h3>Unit тесты</h3>
+          <img src="img/test2.png" alt="" />
+        </section>
+
+        <section>
+          <h3>Api тесты</h3>
+          <img src="img/test3.png" alt="" />
+        </section>
+
+        <section>
+          <h3>UI тесты</h3>
+          <img src="img/test4.png" alt="" />
+        </section>
+
+        <section>
+          <p>
+            Мартин Фаулер (Martin Fowler): Всякий раз, когда возникает соблазн
+            что-то распечатать, используя print, или написать отладочное
+            выражение, напишите тест вместо этого.
+          </p>
+        </section>
+
+        <section>
+          <h3>Написание unit-тестов при помощи PHPUnit</h3>
+        </section>
+
+        <section>
+          <h3>Установка PHPUnit</h3>
+          <img src="img/composer.png" alt="" />
+        </section>
+
+        <section>
+          <h3>Проблема с которой вы можете столкнуться</h3>
+          <img src="img/problem.png" alt="" />
+        </section>
+
+        <section>
+          <h3>Проблема с которой вы можете столкнуться</h3>
+          <img src="img/mbstring.png" alt="" />
+        </section>
+
+        <section>
+          <pre>
+                <code class="language-php" data-trim data-line-numbers="">
+                    namespace Smysh\Zatest;
+
+                    class Calculator
+                    {
+                        public function power(int $x, int $y): int
+                        {
+                            return pow($x, $y);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section>
+          <h3>Структура папок PHPUnit</h3>
+          <img src="img/structure.png" alt="" />
+        </section>
+
+        <section>
+          <pre>
+                <code class="language-php" data-trim data-line-numbers="">
+                    use Smysh\Zatest\Calculator;
+                    use PHPUnit\Framework\TestCase;
+
+                    class CalculatorTest extends TestCase
+                    {
+                        private $calculator;
+                    
+                        protected function setUp(): void
+                        {
+                            $this->calculator = new Calculator();
+                        }
+
+                        public function testPow()
+                        {
+                            $this->assertSame($this->calculator->power(2, 3), 8);
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section>
+          <h3>Запуск теста</h3>
+          <img src="img/run-test.png" alt="" />
+        </section>
+
+        <section>
+          <h3>Ещё пример класса</h3>
+          <pre>
+                <code class="language-php" data-trim data-line-numbers="">
+                    namespace Smysh\Zatest;
+
+                    use InvalidArgumentException;
+
+                    class Email
+                    {
+                        private string $email;
+
+                        private function __construct(string $email)
+                        {
+                            $this->ensureIsValidEmail($email);
+
+                            $this->email = $email;
+                        }
+
+                        public static function fromString(string $email): self
+                        {
+                            return new self($email);
+                        }
+
+                        public function __toString(): string
+                        {
+                            return $this->email;
+                        }
+
+                        private function ensureIsValidEmail(string $email): void
+                        {
+                            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                                throw new InvalidArgumentException(
+                                    sprintf(
+                                        '"%s" is not a valid email address',
+                                        $email
+                                    )
+                                );
+                            }
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section>
+          <h3>Пример теста к Email</h3>
+          <pre>
+                <code class="language-php" data-trim data-line-numbers="">
+                    use Smysh\Zatest\Email;
+                    use PHPUnit\Framework\TestCase;
+
+                    class EmailTest extends TestCase
+                    {
+                        public function testCanBeCreatedFromValidEmailAddress(): void
+                        {
+                            $this->assertInstanceOf(
+                                Email::class,
+                                Email::fromString('user@example.com')
+                            );
+                        }
+
+                        public function testCannotBeCreatedFromInvalidEmailAddress(): void
+                        {
+                            $this->expectException(InvalidArgumentException::class);
+
+                            Email::fromString('invalid');
+                        }
+
+                        public function testCanBeUsedAsString(): void
+                        {
+                            $this->assertEquals(
+                                'user@example.com',
+                                Email::fromString('user@example.com')
+                            );
+                        }
+                    }
+                </code>
+            </pre>
+        </section>
+
+        <section>
+          <h3>Запуск тестов</h3>
+          <img src="img/run-test-2.png" alt="" />
+        </section>
+
+        <section>
+          <h3>Виды сравнений</h3>
+          <img src="img/asserts.png" alt="" />
+        </section>
+
+        <section>
+          <h3>TDD: разработка через тестирование</h3>
+        </section>
+
+        <section>
+          <img src="img/mem-unit-test.png" alt="" />
+        </section>
+
+        <section>
+          <p>
+            TDD техника разработки ПО, которая основывается на принципе: сначала
+            разрабатывается тест для проверки задачи, затем пишется код задачи.
+          </p>
+        </section>
+
+        <section>
+          <h3>Цикл разработки</h3>
+          <ol>
+            <li>анализируется задача и часть кода, которую она решает</li>
+            <li>пишется первый тест для определенного случая</li>
+            <li>написанный тест запускается с ошибкой</li>
+            <li>вносим изменение в код функции, улучшаем решение задачи</li>
+            <li>повторяем п.3</li>
+          </ol>
+        </section>
+
+        <section>
+          <h3>TDD на картинке</h3>
+          <img src="img/tdd.png" alt="" width="600" height="600" />
+        </section>
+
+        <section>
+          <h3>Замечания по TDD</h3>
+          <ol>
+            <li>Да, требует дисциплины</li>
+            <li>Да, лень</li>
+            <li>Код равномерно покрывается тестами</li>
+            <li>
+              Когда пишешь тест вперед кода лучше понимаешь как все должно
+              работать
+            </li>
+          </ol>
+        </section>
+
+        <!-- <section>
+          <pre>
+                <code class="language-php" data-trim data-line-numbers="">
+                    $a = 'PHP';
+                    $b = $a;
+                    $c = $a;
+
+                    xdebug_debug_zval('a'); // refcount=3, is_ref=0
+
+                    $b = 42;
+
+                    xdebug_debug_zval('a'); // refcount=2, is_ref=0
+
+                    unset($c);
+
+                    xdebug_debug_zval('a'); // refcount=1, is_ref=0
+                </code>
+            </pre>
+        </section> -->
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/reveal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.0.4/plugin/highlight/highlight.min.js"></script>
+    <script>
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        plugins: [RevealHighlight],
+        slideNumber: true,
+        autoAnimate: true,
+      });
+    </script>
+  </body>
+</html>
